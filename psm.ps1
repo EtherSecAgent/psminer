@@ -109,22 +109,20 @@ function removefunction {
  echo "---------------------------------------------------------"  
  $name = Read-Host -Prompt 'Enter name'
 
- if ((Get-Content .\psminer\configs\$name.cfg -ErrorAction SilentlyContinue) -eq $null)
-  {Write-Host -ForegroundColor Red "Config not found, please try again"\
+ if ((Get-Childitem .\psminer\configs\$name.cfg -ErrorAction SilentlyContinue) -eq $null)
+  {Write-Host -ForegroundColor Red "Config not found, please try again"
   sleep 4
   mainmenu
 
   }
-  if ((Get-Content .\psminer\configs\$name.cfg -InformationAction SilentlyContinue) -eq $true)
-  {Remove-Item -Path .\psminer\configs\$name.cfg -Confirm ;
+  
+  else {Remove-Item -Path .\psminer\configs\$name.cfg -Confirm ;
+   Write-Host "Going back to main menu"
    Sleep 3
    mainmenu
 
   }
-   else {write-host -ForegroundColor Red "Invalid Option, looping back to menu in 5s"  
-       sleep 5  
-       mainmenu  
-  }
+
   }
  
  #listfunction function
